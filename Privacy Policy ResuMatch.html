@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMatch - Privacy Policy</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #222; line-height: 1.7; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 28px; }
+    .updated { color: #666; font-size: 14px; margin-bottom: 30px; }
+    a { color: #4f8cff; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    .contact { background: #f5f5f5; padding: 16px; border-radius: 8px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>ResuMatch - Privacy Policy</h1>
+  <p class="updated">Last updated: April 2026</p>
+
+  <p>ResuMatch is a Chrome extension that analyses job descriptions against your resume. Your privacy matters. This policy explains what data we collect, how we use it, and how we protect it.</p>
+
+  <h2>Data We Collect</h2>
+  <p><strong>On signup (one-time):</strong></p>
+  <ul>
+    <li><strong>Name and email address</strong> - collected when you first open the extension. Used only to send product updates and communicate with early users. Stored in a Google Sheet accessible only to the developer.</li>
+    <li><strong>Use case selection</strong> - your reason for using the extension (e.g., job search, ATS check). Used to improve the product.</li>
+  </ul>
+
+  <p><strong>Stored locally on your device only:</strong></p>
+  <ul>
+    <li><strong>API keys</strong> - your Grok and/or Gemini API keys are stored in Chrome's local storage on your device. They are never sent to any server other than the respective API providers (xAI for Grok, Google for Gemini).</li>
+    <li><strong>Resume text</strong> - your pasted or uploaded resume content is stored locally via chrome.storage.local. It is only sent to the AI provider you configured (Grok or Gemini) for analysis and is not stored on any server we control.</li>
+  </ul>
+
+  <h2>Data We Do NOT Collect</h2>
+  <ul>
+    <li>We do not collect or store the job descriptions you analyse.</li>
+    <li>We do not collect browsing history, cookies, or any page content beyond the active tab when you click "Analyse".</li>
+    <li>We do not track your usage, clicks, or behaviour within the extension.</li>
+    <li>We do not sell, share, or monetise any user data.</li>
+  </ul>
+
+  <h2>Third-Party Services</h2>
+  <p>The extension sends data to third-party APIs only when you initiate an analysis:</p>
+  <ul>
+    <li><strong>xAI (Grok API)</strong> - if you use a Grok API key, your resume text and the job description are sent to xAI's API for analysis. Subject to <a href="https://x.ai/legal/terms-of-service" target="_blank">xAI's Terms of Service</a>.</li>
+    <li><strong>Google (Gemini API)</strong> - if you use a Gemini API key, the same data is sent to Google's Gemini API. Subject to <a href="https://ai.google.dev/gemini-api/terms" target="_blank">Google's API Terms</a>.</li>
+    <li><strong>GOV.UK</strong> - the extension downloads the publicly available UK Register of Licensed Sponsors CSV to check visa sponsorship status. No personal data is sent to GOV.UK.</li>
+    <li><strong>Google Forms</strong> - your name, email, and use case selection are submitted to a Google Form on signup.</li>
+  </ul>
+
+  <h2>Data Storage and Security</h2>
+  <ul>
+    <li>All user data (resumes, API keys) is stored locally on your device using Chrome's storage API.</li>
+    <li>No backend server, no database, no cloud storage is used by this extension.</li>
+    <li>API keys are transmitted directly from your browser to the API provider over HTTPS.</li>
+    <li>You can delete all stored data at any time by removing the extension from Chrome.</li>
+  </ul>
+
+  <h2>Your Rights</h2>
+  <ul>
+    <li>You can request deletion of your signup data (name and email) at any time by emailing us.</li>
+    <li>You can remove all locally stored data by uninstalling the extension.</li>
+    <li>You can use the extension without providing a real name or email if you prefer.</li>
+  </ul>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+
+  <div class="contact">
+    <strong>Contact</strong><br>
+    For any privacy-related questions or data deletion requests:<br>
+    Email: <a href="mailto:m.umairshah366@gmail.com">m.umairshah366@gmail.com</a><br>
+    Developer: Umair Shah
+  </div>
+</body>
+</html>
