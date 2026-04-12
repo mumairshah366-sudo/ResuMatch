@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResuMatch</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="lib/pdf.min.js"></script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- HEADER -->
+    <header id="header">
+      <div class="logo-row">
+        <div class="logo-mark">R</div>
+        <div>
+          <h1>ResuMatch</h1>
+          <p class="tagline">AI Job Fit Analyser</p>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </header>
+
+    <!-- SCREEN: LOGIN (Page 1 - Name, Email, Use Case) -->
+    <div id="loginScreen" class="screen">
+      <div class="login-hero">
+        <div class="logo-mark" style="width:48px;height:48px;font-size:22px;margin:0 auto 16px;">R</div>
+        <h2 style="font-size:20px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;">Welcome to ResuMatch</h2>
+        <p style="color:var(--text-dim);font-size:13px;margin-bottom:24px;">AI-powered job fit analysis. Free forever.</p>
+      </div>
+      <div class="setup-section">
+        <label class="field-label">Your Name</label>
+        <input type="text" id="loginName" placeholder="e.g. Umair Shah" required>
+      </div>
+      <div class="setup-section">
+        <label class="field-label">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@email.com" required>
+      </div>
+      <div class="setup-section">
+        <label class="field-label">What brings you here?</label>
+        <div class="usecase-options">
+          <label class="usecase-opt"><input type="checkbox" value="Job Search"> Job Search</label>
+          <label class="usecase-opt"><input type="checkbox" value="ATS Check"> Check ATS Compatibility</label>
+          <label class="usecase-opt"><input type="checkbox" value="Sponsorship Check"> Check UK Visa Sponsorship</label>
+          <label class="usecase-opt"><input type="checkbox" value="Q&A Generator"> Application Q&A Generator</label>
+          <label class="usecase-opt"><input type="checkbox" value="Resume Optimisation"> Resume Optimisation</label>
+          <label class="usecase-opt"><input type="checkbox" value="Salary Research"> Salary Research</label>
+        </div>
+      </div>
+      <button id="loginBtn" class="btn btn-primary full-w">Next</button>
+    </div>
+
+    <!-- SCREEN: SETUP (Page 2 - API Keys + Resumes) -->
+    <div id="setupScreen" class="screen hidden">
+      <div class="setup-section">
+        <label class="field-label">
+          API Keys <span class="hint" style="text-transform:none;letter-spacing:0;font-weight:400">(add one or both)</span>
+        </label>
+
+        <div class="api-help-banner" id="apiHelpBanner">
+          <div class="api-help-header" id="apiHelpToggle">
+            <span>Don't have an API key?</span>
+            <span class="help-link" style="cursor:pointer">Show me how</span>
+          </div>
+          <div id="apiHelpPanel" class="api-help-panel hidden">
+            <div class="api-help-tabs">
+              <button type="button" class="api-tab active" data-tab="grok">Grok (Recommended)</button>
+              <button type="button" class="api-tab" data-tab="gemini">Gemini (Free tier)</button>
+            </div>
+            <div class="api-tab-content" id="grokHelp">
+              <div class="api-step"><span class="step-num">1</span> Go to <a href="https://console.x.ai/" target="_blank">console.x.ai</a></div>
+              <div class="api-step"><span class="step-num">2</span> Sign up with Google or email</div>
+              <div class="api-step"><span class="step-num">3</span> You get <strong>$25 free credits</strong> instantly (no card needed)</div>
+              <div class="api-step"><span class="step-num">4</span> Go to API Keys section, click "Create API Key"</div>
+              <div class="api-step"><span class="step-num">5</span> Copy the key and paste it below</div>
+              <p class="hint" style="margin-top:8px">$25 covers thousands of analyses. Most reliable option.</p>
+            </div>
+            <div class="api-tab-content hidden" id="geminiHelp">
+              <div class="api-step"><span class="step-num">1</span> Go to <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></div>
+              <div class="api-step"><span class="step-num">2</span> Sign in with your Google account</div>
+              <div class="api-step"><span class="step-num">3</span> Click "Create API Key" and select a project</div>
+              <div class="api-step"><span class="step-num">4</span> Copy the key and paste it below</div>
+              <p class="hint" style="margin-top:8px">Completely free but can be unreliable during peak hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;margin-bottom:8px">
+          <label style="font-size:11px;color:var(--text-dim);margin-bottom:4px;display:block">Grok API Key (Recommended - $25 free credits)</label>
+          <input type="password" id="grokKeyInput" placeholder="Starts with xai-..." autocomplete="off">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--text-dim);margin-bottom:4px;display:block">Gemini API Key (Free tier)</label>
+          <input type="password" id="geminiKeyInput" placeholder="Paste Gemini key from AI Studio" autocomplete="off">
+        </div>
+      </div>
+      <div class="setup-section">
+        <label class="field-label">Resumes <span class="count" id="resumeCount">0/4</span></label>
+        <div id="resumeList" class="resume-list"></div>
+        <button id="addResumeBtn" class="btn btn-secondary">+ Add Resume</button>
+      </div>
+      <button id="saveSetupBtn" class="btn btn-primary full-w">Save & Start Analysing</button>
+    </div>
+
+    <!-- MODAL: Add/Edit Resume -->
+    <div id="resumeModal" class="modal-overlay hidden">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="modalTitle">Add Resume</h3>
+          <button id="closeModalBtn" class="icon-btn">&times;</button>
+        </div>
+        <label class="field-label">Label</label>
+        <input type="text" id="resumeLabelInput" placeholder='e.g. "Senior PM - Logistics Ops"' maxlength="50">
+
+        <label class="field-label mt-12">Resume</label>
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">PDF</div>
+          <p>Drop a PDF here or <label for="pdfFileInput" class="upload-link">browse</label></p>
+          <p class="hint">Or paste text below</p>
+          <input type="file" id="pdfFileInput" accept=".pdf" style="display:none">
+        </div>
+        <div id="pdfStatus" class="pdf-status hidden"></div>
+
+        <textarea id="resumeTextInput" placeholder="Or paste your full resume text here..." rows="8" class="mt-12"></textarea>
+        <div class="modal-actions">
+          <button id="deleteResumeBtn" class="btn btn-danger hidden">Delete</button>
+          <button id="saveResumeBtn" class="btn btn-primary">Save Resume</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN: MAIN -->
+    <div id="mainScreen" class="screen hidden">
+
+      <!-- Ready State -->
+      <div id="readyState">
+        <div class="ready-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <p class="ready-text">Navigate to a job listing, then click <strong>Analyse This Job</strong></p>
+        <button id="analyseBtn" class="btn btn-primary full-w">Analyse This Job</button>
+      </div>
+
+      <!-- Loading -->
+      <div id="loadingState" class="hidden">
+        <div class="loader"></div>
+        <p class="loading-text">Analysing job description against your resumes...</p>
+      </div>
+
+      <!-- Results -->
+      <div id="resultsState" class="hidden">
+
+        <!-- 1. Score Ring -->
+        <div class="score-section">
+          <div class="score-ring" id="scoreRing">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" class="ring-bg"/>
+              <circle cx="60" cy="60" r="52" class="ring-fill" id="ringFill"/>
+            </svg>
+            <span class="score-value" id="scoreValue">--</span>
+          </div>
+          <div class="score-meta">
+            <div class="best-resume-tag" id="bestResumeTag">--</div>
+            <p class="score-label">Relevancy Score</p>
+          </div>
+        </div>
+        <div id="scoreBreakdown" class="score-breakdown hidden"></div>
+
+        <!-- 2. Resume Rankings -->
+        <div class="result-card">
+          <h4 class="card-title">Resume Recommendation</h4>
+          <div id="resumeRankings" class="rankings"></div>
+        </div>
+
+        <!-- 3. Why You're a Fit -->
+        <div class="result-card">
+          <h4 class="card-title">Why You're a Fit</h4>
+          <div id="fitReasons" class="result-body"></div>
+        </div>
+
+        <!-- 4. Gaps -->
+        <div class="result-card">
+          <h4 class="card-title">Gaps & Watch-outs</h4>
+          <div id="gapReasons" class="result-body"></div>
+        </div>
+
+        <!-- 5. ATS Score & Keywords -->
+        <div class="result-card">
+          <h4 class="card-title">ATS Compatibility</h4>
+          <div class="ats-score-row">
+            <span class="ats-label">ATS Score</span>
+            <span class="ats-value" id="atsScore">--</span>
+          </div>
+          <div id="missingKeywords" class="result-body"></div>
+        </div>
+
+        <!-- 6. Suggested Bullet Rewrites -->
+        <div class="result-card">
+          <h4 class="card-title">Suggested Bullet Rewrites</h4>
+          <div id="bulletRewrites" class="result-body"></div>
+        </div>
+
+        <!-- 7. Resume Health & Pro Tips -->
+        <div class="result-card">
+          <h4 class="card-title">Pro Tips & Remarks</h4>
+          <div id="proTips" class="result-body"></div>
+        </div>
+
+        <!-- 8. Salary Estimate -->
+        <div class="result-card" id="salaryCard">
+          <h4 class="card-title">Salary Estimate</h4>
+          <div id="salaryEstimate" class="result-body"></div>
+          <p class="disclaimer">Based on market averages. Discretionary - please research independently.</p>
+        </div>
+
+        <!-- 9. Company Intel + Glassdoor -->
+        <div class="result-card">
+          <h4 class="card-title">Company Intel</h4>
+          <div id="companyIntel" class="result-body"></div>
+          <div id="glassdoorRow" class="glassdoor-row hidden">
+            <span class="gd-label">Glassdoor</span>
+            <span class="gd-score" id="glassdoorScore">--</span>
+            <span class="gd-sub" id="glassdoorNote"></span>
+          </div>
+        </div>
+
+        <!-- 10. UK Visa Sponsorship -->
+        <div class="result-card">
+          <h4 class="card-title">UK Visa Sponsorship <span class="card-subtitle">via GOV.UK Register</span></h4>
+          <div id="sponsorResult" class="result-body">
+            <span class="text-dim">Checking register...</span>
+          </div>
+        </div>
+
+        <!-- 11. Q&A Mode -->
+        <div class="result-card qa-card">
+          <h4 class="card-title">Answer Application Questions</h4>
+          <textarea id="questionInput" placeholder='Paste a question and any instructions, e.g.&#10;"Why do you want to work here? Answer in 3 bullets"&#10;"Tell us about yourself - keep it under 100 words and mention my side project @yapwithshah"' rows="4"></textarea>
+          <div class="qa-controls">
+            <select id="tonePicker">
+              <option value="professional">Professional</option>
+              <option value="conversational">Conversational</option>
+              <option value="concise">Concise</option>
+            </select>
+            <button id="answerBtn" class="btn btn-primary">Generate Answer</button>
+          </div>
+          <div id="answerOutput" class="answer-output hidden"></div>
+          <div id="feedbackSection" class="feedback-section hidden">
+            <textarea id="feedbackInput" placeholder='Give feedback to refine, e.g.&#10;"Make it shorter"&#10;"Add reference to my social media @yapwithshah"&#10;"Use bullet points instead"&#10;"More emphasis on fintech experience"' rows="2"></textarea>
+            <button id="refineBtn" class="btn btn-secondary full-w">Refine Answer</button>
+          </div>
+        </div>
+
+        <button id="newAnalysisBtn" class="btn btn-secondary full-w mt-12">Analyse Another Job</button>
+      </div>
+
+      <!-- Error -->
+      <div id="errorState" class="hidden">
+        <p class="error-text" id="errorMessage"></p>
+        <button id="retryBtn" class="btn btn-secondary">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

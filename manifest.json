@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ResuMatch - AI Job Fit Analyser",
+  "version": "2.0.0",
+  "description": "Analyse any job listing against your resume. Relevancy score, ATS check, salary estimate, and UK visa sponsorship.",
+  "permissions": ["activeTab", "storage", "scripting", "sidePanel", "tabs"],
+  "host_permissions": [
+    "https://generativelanguage.googleapis.com/*",
+    "https://assets.publishing.service.gov.uk/*",
+    "https://api.x.ai/*",
+    "https://docs.google.com/*",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
